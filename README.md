@@ -1,82 +1,211 @@
-# VOLATILITY-PREDICTIONS-
-This project aims to forecast stock market volatility using historical price data in order to estimate future levels of market uncertainty. Volatility, measured as the rolling standard deviation of returns.
+# Stock Market Volatility Forecasting Using Linear Regression
 
-tock Market Volatility Forecasting Using Linear Regression
+**Author:** Katlego Mathebula
+**Tech Stack:** Python · pandas · NumPy · matplotlib · scikit-learn · yfinance
+**Project Type:** Time-Series Risk Modeling
+**Asset Modeled:** Apple Inc. (AAPL)
 
-Author: Katlego Mathebula
+## Executive Summary
 
-This project forecasts short-term stock market volatility using historical price data for AAPL (Apple Inc.). Volatility, measured as the rolling standard deviation of daily returns, represents the magnitude of price fluctuations and financial risk rather than price direction. The central question: Can historical price behavior help predict short-term volatility?
+Financial markets are inherently uncertain. While price direction is difficult to predict, volatility — the magnitude of price fluctuations — can be modeled to estimate risk exposure.
 
-1. Project Overview
+This project builds a time-series regression model to forecast short-term volatility for Apple Inc. (AAPL) using historical price data.
 
-Historical daily closing prices for AAPL were collected using Yahoo Finance.
+Volatility is defined as the **21-day rolling standard deviation of daily returns**, serving as a proxy for monthly market risk.
 
-Daily returns were calculated, and 21-day rolling standard deviation was used to estimate monthly volatility.
+The central research question:
 
-A Linear Regression model was trained to predict volatility based on past returns.
-
-Model evaluation included Mean Squared Error (MSE), R², and visual comparison of actual vs predicted volatility.
-
-This project demonstrates how time-series analysis and regression modeling can transform raw market data into actionable insights for risk management.
-
-2.Libraries Required
-pip install yfinance pandas numpy matplotlib scikit-learn
+> Can historical return behavior help predict future short-term volatility?
 
 
-Python libraries used in the project:
+##  Business Problem
 
+Investors, hedge funds, and financial institutions rely on volatility estimates for:
+
+- Risk management
+- Portfolio allocation
+- Options pricing
+- Capital requirement estimation
+- Position sizing strategies
+
+Accurate volatility forecasting helps institutions:
+
+- Reduce exposure during high-risk regimes
+- Adjust leverage dynamically
+- Improve downside protection
+
+This project simulates a quantitative risk modeling workflow.
+
+##  Methodology Overview
+
+The project follows a structured financial modeling pipeline:
+
+1. Download historical price data
+2. Compute daily returns
+3. Estimate rolling volatility
+4. Preserve chronological order (no shuffling)
+5. Train a regression model
+6. Evaluate out-of-sample performance
+7. Compare actual vs predicted volatility
+
+## Data Collection
+
+Historical daily closing prices were retrieved using:
+
+```python
 import yfinance as yf
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
-from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_squared_error, r2_score
+```
 
-3. Workflow
+Data source: Yahoo Finance
+Period: 2010–2023
+Asset: AAPL
 
-Download historical data:
+Chronological order was strictly preserved to maintain time-series integrity.
 
-data = yf.download('AAPL', start='2010-01-01', end='2023-01-01')
+##  Volatility Construction
 
+Volatility was calculated as:
 
-Visualize closing prices to understand trends.
-
-Calculate daily returns and 21-day rolling volatility:
-
+```python
 data['Daily Return'] = data['Close'].pct_change()
 data['Volatility'] = data['Daily Return'].rolling(window=21).std()
-data = data.dropna()
+```
+
+Why 21 days?
+
+- Represents approximately one trading month
+- Common standard in financial risk modeling
+- Captures short-term risk dynamics
+
+Missing values introduced by rolling windows were removed to ensure clean modeling.
 
 
-Prepare features and target:
+##  Feature & Target Design
 
-X = Daily Return
+- Feature (X): Daily Return
+- Target (y): 21-Day Rolling Volatility
 
-y = Volatility
+This approach tests whether immediate return behavior contains predictive information about short-term volatility.
 
-Train-test split (chronological, 80/20):
+## Train-Test Strategy
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
+The dataset was split chronologically:
+
+```python
+train_test_split(..., shuffle=False)
+```
+
+80% Training
+20% Testing
+
+Why no shuffling?
+
+Shuffling time-series data introduces look-ahead bias and data leakage.
+
+This preserves real-world forecasting conditions.
+
+##  Model Selection
+
+Algorithm Used: **Linear Regression**
+
+Why Linear Regression?
+
+- Baseline interpretable model
+- Tests linear dependency between returns and volatility
+- Provides transparent coefficient interpretation
+- Serves as a benchmark for more advanced models
 
 
-Train Linear Regression model:
+##  Model Evaluation
 
-model = LinearRegression()
-model.fit(X_train, y_train)
+Performance was evaluated using:
+
+-  Mean Squared Error (MSE)
+-  R-squared (R²)
+-  Visual comparison of actual vs predicted volatility
+
+Example Output:
+
+-  MSE: 5.41e-05
+-  R²: -0.38
 
 
-Predict and evaluate:
+## Interpretation of Results
 
-y_pred = model.predict(X_test)
-mse = mean_squared_error(y_test, y_pred)
-r2 = r2_score(y_test, y_pred)
+The negative R² suggests:
 
+-  Linear regression struggles to capture volatility dynamics
+-  Volatility clustering is likely nonlinear
+-  Financial volatility exhibits heteroskedastic behavior
 
-Visualize predictions vs actual volatility.
+This is consistent with financial theory, where volatility often follows nonlinear processes.
 
-Model Evaluation
+This demonstrates awareness that:
 
-Mean Squared Error (MSE): Measures prediction error
+> A simple linear model may not be sufficient for financial volatility forecasting.
 
-R-squared (R²): Measures model fit
+##  Visualization
+
+The model compares predicted volatility against actual realized volatility to evaluate trend tracking ability and lag behavior.
+
+This visual inspection helps assess:
+
+- Volatility regime detection
+- Responsiveness to spikes
+- Forecast smoothing behavior
+
+##  Financial Significance
+
+Even with modest predictive performance, this project demonstrates:
+- Time-series discipline
+- Risk modeling fundamentals
+- Financial return transformation
+- Rolling window techniques
+- Out-of-sample evaluation
+
+These are foundational skills in:
+
+- Quantitative finance
+- Risk analytics
+- Portfolio management
+- Financial data science
+
+## Libraries Used
+
+```bash
+pip install yfinance pandas numpy matplotlib scikit-learn
+```
+
+Core Libraries:
+
+-  yfinance → Data acquisition
+-  pandas → Data manipulation
+-  NumPy → Numerical computation
+-  matplotlib → Visualization
+-  scikit-learn → Modeling & evaluation
+
+##  Potential Improvements
+
+To extend this project toward institutional-grade modeling:
+
+-  Lagged return features
+-  Rolling variance features
+-  GARCH modeling
+- LSTM neural networks
+-  Feature engineering using technical indicators
+-  Volatility regime classification
+-  Multi-asset comparison
+
+## Conclusion
+
+This project demonstrates how raw financial market data can be transformed into a structured volatility forecasting framework.
+
+It highlights:
+
+- Time-series awareness
+-  Avoidance of data leakage
+-  Baseline model benchmarking
+-  Risk-focused interpretation
+
+Rather than overfitting for performance, the focus was on methodological correctness and financial reasoning.
+
