@@ -22,7 +22,7 @@ Financial institutions don't just need to know *if* prices change  they need to 
 - 🔐 **Capital requirements** — regulators mandate volatility-linked reserves
 - ⚖️ **Position sizing** — preventing catastrophic drawdowns
 
-Without structured volatility forecasting, institutions fly blind  often discovering risk *after* it's too late. This project simulates the kind of quantitative risk modeling workflow used at hedge funds, asset managers, and risk desks worldwide. 
+Without structured volatility forecasting, institutions fly blind, often discovering risk *after* it's too late. This project simulates the kind of quantitative risk modeling workflow used at hedge funds, asset managers, and risk desks worldwide. 
 
 ---
 
