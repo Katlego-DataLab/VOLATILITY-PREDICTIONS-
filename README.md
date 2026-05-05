@@ -6,7 +6,7 @@
 
 ## 🚀 TL;DR
 
-Built a **volatility forecasting pipeline** for Apple Inc. (AAPL) that estimates short-term market risk from historical price data. Trained a baseline Linear Regression model on 13 years of daily returns establishing a reproducible, leakage-free benchmark that reveals the **nonlinear nature of financial volatility** and sets the stage for GARCH & LSTM upgrades. 🎯
+Built a **volatility forecasting pipeline** for Apple Inc. (AAPL) that estimates short-term market risk from historical price data. Trained a baseline Linear Regression model on 13 years of daily returns establishing a reproducible, leakage-free benchmark that reveals the **nonlinear nature of financial volatility** and sets the stage for GARCH & LSTM upgrades. 
 
 ---
 
@@ -22,7 +22,7 @@ Financial institutions don't just need to know *if* prices change  they need to 
 - 🔐 **Capital requirements** — regulators mandate volatility-linked reserves
 - ⚖️ **Position sizing** — preventing catastrophic drawdowns
 
-Without structured volatility forecasting, institutions fly blind — often discovering risk *after* it's too late. This project simulates the kind of quantitative risk modeling workflow used at hedge funds, asset managers, and risk desks worldwide. 🌍
+Without structured volatility forecasting, institutions fly blind — often discovering risk *after* it's too late. This project simulates the kind of quantitative risk modeling workflow used at hedge funds, asset managers, and risk desks worldwide. 
 
 ---
 
@@ -49,7 +49,7 @@ This pipeline enables:
 - ✅ **Quant researchers** to benchmark advanced models (GARCH, LSTM) against this linear baseline
 - ✅ **Risk committees** to visualize predicted vs. actual volatility for backtesting capital allocation strategies
 
-**Who uses this?**  Risk Analytics teams, Quantitative Finance desks, Portfolio Construction groups, and RegTech compliance teams. 🏢
+**Who uses this?**  Risk Analytics teams, Quantitative Finance desks, Portfolio Construction groups, and RegTech compliance teams. 
 
 ---
 
