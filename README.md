@@ -1,7 +1,7 @@
 # 📈 Stock Market Volatility Forecasting · AAPL
 
 > *Transforming raw market data into actionable risk intelligence* using Python, time-series regression & financial feature engineering.
-![Uploading image.png…]()
+
 
 ---
 
