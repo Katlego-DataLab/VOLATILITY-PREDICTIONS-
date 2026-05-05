@@ -200,4 +200,4 @@ jupyter notebook volatility_forecasting.ipynb
 
 ---
 
-*Built with 🖤 and a lot of market data · If this was helpful, drop a ⭐!*
+*Built with 🤍 and a lot of market data · 
